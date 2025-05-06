@@ -1,4 +1,4 @@
-package org.function_examples;
+package com.function_examples;
 
 public class Student {
 
@@ -9,7 +9,11 @@ public class Student {
         this.name = name;
         this.percentage = percentage;
     }
+    public Student(){}
 
+    public Student(String name) {
+        this.name = name;
+    }
     public double getPercentage() {
         return percentage;
     }

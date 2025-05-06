@@ -1,4 +1,4 @@
-package org.function_examples;
+package com.function_examples;
 
 import java.time.LocalDate;
 import java.util.Date;
