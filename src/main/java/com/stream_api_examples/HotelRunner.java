@@ -51,6 +51,28 @@ public class HotelRunner {
         for (Map.Entry<String, Double> entry : hotelNameAndPrice.entrySet()){
             System.out.println(entry.getKey() + " → $" + entry.getValue());
         }
+
+       List<String> hotelPriceByHightoLow1 = hotels.stream()
+                .filter(hotel -> hotel.isHasWifi()==false && hotel.isHasParking()==true)
+                .sorted(Comparator.comparing(Hotel::getPricePerNight).reversed())
+                .map(hotel -> hotel.getName())
+                .collect(Collectors.toList());
+        hotelPriceByHightoLow1.forEach(System.out::println);
+    }
+
+    public static void LimitDataUsingStreamAPI(){
+        System.out.println("\nLimit the list of Data\n");
+
+        long noOfHotelsHasWifi =hotels.stream()
+                .filter(hotel -> hotel.isHasWifi()==true)
+                .count();
+        System.out.println("Count of Hotels Has Wifi : "+noOfHotelsHasWifi);
+
+        hotels.stream()
+                .filter(hotel -> hotel.isHasWifi()==true)
+                .sorted(Comparator.comparing(Hotel::getPricePerNight))
+                .limit(3)
+                .forEach(System.out::println);
     }
     public static void main(String[] args) {
 
@@ -72,6 +94,7 @@ public class HotelRunner {
         getHasWifiByPriceLowtoHigh();
 
         System.out.println("\n Filter Hotels has wifi and price by High to Low\n");
-        useJava8Implamentation();
+//        useJava8Implamentation();
+          LimitDataUsingStreamAPI();
     }
 }

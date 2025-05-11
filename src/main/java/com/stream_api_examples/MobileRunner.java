@@ -1,8 +1,6 @@
 package com.stream_api_examples;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class MobileRunner {
 
@@ -23,7 +21,7 @@ public class MobileRunner {
         mobiles.add(new Mobile(Mobile.Brand.NOKIA, "Nokia XR21", 128, 499.99, 64, 6.49, "Pine Green"));
         mobiles.add(new Mobile(Mobile.Brand.XIAOMI, "Xiaomi 13 Pro", 256, 999.00, 50, 6.73, "Ceramic White"));
         mobiles.add(new Mobile(Mobile.Brand.APPLE, "iPhone 13 Mini", 128, 699.99, 12, 5.4, "Pink"));
-
+/*
         System.out.printf("| %-15s |  %-15s |  %-15s |  %-15s |  %-15s |  %-15s |  %-15s |%n", "BRAND", "MODEL", "MEMORY", "PRICE", "MEGAPIXEL",
                 "DISPLAYSIZE", "COLOR");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
@@ -41,6 +39,31 @@ public class MobileRunner {
             System.out.printf("| %-15s |  %-15s |  %-15s |  %-15s |  %-15s |  %-15s |  %-15s |%n", mobi.getBrand(),mobi.getModel(), mobi.getMemory()
                     , mobi.getPrice(), mobi.getMegapixel(), mobi.getDisplaySize(), mobi.getColor());
         }
+*/
+        System.out.println("Print 64 mega pixels device \n");
+        mobiles.stream()
+                .filter(mobile -> mobile.getMemory() == 64)
+                .forEach(System.out::println);
+
+        long countOf64MegaPixels =mobiles.stream()
+                .filter(mobile -> mobile.getMemory() == 64)
+                .count();
+        System.out.println("\nCount of 64 mega pixels Device : "+countOf64MegaPixels);
+
+        List<Mobile> mobileListByPrice = mobiles.stream()
+                .filter(mobile -> mobile.getBrand().equals(Mobile.Brand.APPLE))
+                .sorted(Comparator.comparing(Mobile::getPrice).reversed())
+                .toList();
+
+        System.out.println("\nSorted Data\n");
+
+        Map<Double, Mobile.Brand> mobileByPriceHightoLow = new LinkedHashMap<>();
+        mobileListByPrice.forEach(mobile -> mobileByPriceHightoLow.put(mobile.getPrice(), mobile.getBrand()));
+
+        for (Map.Entry<Double, Mobile.Brand> entry : mobileByPriceHightoLow.entrySet()){
+            System.out.println(entry.getKey() + " → $" + entry.getValue());
+        }
+
 
     }
 
