@@ -13,7 +13,20 @@ public class DistinctValue {
 
          names.stream()
                 .distinct()
-                .forEach(System.out::println);  ;
+                 .skip(2) // Skip the first two elements
+                 .map(String::toUpperCase)
+                .forEach(System.out::println);
 
+
+     List<Integer> countOfNames =  names.stream()
+                .distinct()
+                .skip(2) // Skip the first two elements
+                .map(String::toUpperCase)
+                .map(String::length)
+                .collect(Collectors.toList());
+
+        countOfNames.forEach(System.out::print);
     }
+
+
 }
